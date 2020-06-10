@@ -1,0 +1,105 @@
+Esame giugno 2020 Sistemi informativi sul web
+
+Squillante Davide
+
+Descrizione dei casi d'uso del progetto
+
+User: /users/
+
+SIGNUP: /index  e  /users/register
+L'utente si registra inserendo nel form prima le credenziali ovvero  username e password, poi le relative 
+caratteristiche dell'user ovvero firstname e lastname(generando automaticamente il creationtimestamp e 
+lastupdatetimestamp) creando nel database le sue credenziali(con relativo user).
+
+AUTENTICAZIONE: /users/register e /login
+L'utente accede con le credenziali appena create tramite il signup, inserisce i dati nella form specificata, 
+inviandoli alla pagina home dell'User per poter interagire con la pagina web.
+
+
+VISUALIZZARE IL MIO PROFILO:  /users/me  
+Nella pagina home dell'user l'utente cliccando su Profile può visualizzare le informazioni del suo profilo 
+inserite nel signup, attraverso l'utilizzo di un metodo get.
+
+AGGIORNARE IL MIO PROFILO:  /users/modify
+All'interno della pagina del profilo, attraverso il a href (get), l'utente può inserire delle nuove credenziali
+per modificare o aggiornare il suo profilo. 
+Accettando le modifiche avrà un nuovo username,password,firstName e LastName, e viene aggiornato
+il lastupdatetimestamp alla data della modifica.
+
+------------------------------------------------------------------------------------------------------------------
+
+Admin: /admin/
+
+VISUALIZZAZIONE ED ELIMINAZIONE DI UN USER: /admin/users e  admin/users/{username}/delete
+
+Avendo l'insieme degli user nella pagina /admin/users, l'admin può eliminare un user cliccando su un bottone relativo
+all'user specificato. 
+
+------------------------------------------------------------------------------------------------------------------
+
+Project: /projects/
+
+CREARE UN NUOVO PROGETTO: /projects/add
+Attraverso un ottenimento dell'user loggato,inizializzando un formProject permettendo l'inserimento(post)
+del nome e della descrizione del progetto, il database (seguendo le scelte dell'user) creerà il progetto 
+definito e lo inserirà nella pagina delle viste dei progetti con tutte le informazioni inserite nel 
+form specificato.
+
+VISUALIZZARE I MIEI PROGETTI: /projects e /projects/{projectId}
+Entrando in questa pagina vedrò l'insieme dei progetti con nome e descrizione, con un collegamento diretto
+tramite la voce nome del progetto ai dati relativi al progetto.
+In base all'id definito nel momento della creazione,cliccando sul relativo progetto di cui voglio vedere 
+le informazioni,viene inviata una richiesta (get) dell'user con relative informazioni del project 
+caratterizzato da quel certo id inserito nell'ultima parte dell'url/uri specificata.
+La form e realizzata dal fatto che se scelgo una certa voceProject, cliccando sul riferimento effettuo una 
+get tramite il projectService di quel determinato progetto, prendendo tutte le relative informazioni ovvero
+nome,descrizione,membri con loro informazioni e task con relative informazioni.
+
+VISUALIZZARE I PROGETTI CONDIVISI CON ME: /projects/sharing
+Entrando in questa pagina vedrò l'insieme dei progetti  però condivisi con l'utente con nome e descrizione,
+con un collegamento diretto tramite la voce nome del progetto ai dati relativi al progetto.
+Come con i progetti di cui l'utente è proprietario, permetto tramite il click verso il a href di entrare 
+nella pagina del progetto e visualizzare le informazioni dettagliate.
+
+AGGIORNARE I DATI DI UN MIO PROGETTO: projects/modify
+Questo metodo richiede(get) l'user loggato all'intera sessione.
+Attraverso questo collegamento l'utente passerà a una nuova pagina dove viene richiesto l'id del progetto
+e tramite esso, scrivendo i diversi cambiamenti che egli vuole adottare e passando questi dati al form
+di tipo project setterà ogni elemento con le caratteristiche descritte.
+Il projectService provvederà quindi a salvare tutti questi cambiamenti appena decisi.
+Nessuno potrà modificare progetti a meno che non ne è un proprietario.
+
+CANCELLARE UN MIO PROGETTO: projects/delete
+La cancellazione del progetto richiede ancora dell'user loggato alla sessione, e richiedendogli l'id di quale
+project egli volesse cancellare,(post dell'id)egli cancella il preciso progetto e tutti i collegamenti ad esso
+collegati(collegamento task che non saranno più di questo progetto,collegamento membri che però potranno essere 
+coinvolti in altri progetti).
+Nessuno potrà cancellare progetti a meno che non ne è un proprietario.
+ 
+CONDIVIDERE UN MIO PROGETTO CON UN ALTRO UTENTE: projects/share
+Richiedendo in sessione l'user,cliccando su Share project owned l'utente decide il progetto che vuole condividere,
+scrivendo nella form prima l'id del progetto e poi l'username di questa persona a cui vuole permettere di 
+visualizzare il progetto.
+L'utente a cui è data la vista non può fare alcuna modifica al progetto condiviso.
+
+------------------------------------------------------------------------------------------------------------------
+
+Task: /tasks/
+
+AGGIUNGERE UN NUOVO TASK A UN MIO PROGETTO: tasks/add
+L'utente inserisce le informazioni richieste per aggiungere un task. Inserendo l'id del progetto nella form progetto,
+inserendo le info della task nella form del task, si crea quindi il task inserendolo nella pagina di visualizzazione
+collegandolo correttamente al progetto dato.
+
+AGGIORNARE UN TASK DI UN MIO PROGETTO: tasks/update
+Inserendo di consueto l'id del progetto, l'utente può effettuare modifiche al task, inserendo il nome stesso del 
+task precedentemente dato nell'add. Questa scelta è data dal fatto che l'utente vorrà modificare principalmente 
+descrizione e indicare se un certo task è stato completato o no.
+
+CANCELLARE UN TASK DA UN MIO PROGETTO: tasks/delete
+Permette di cancellare un certo task da un determinato progetto, così l'utente inserisce l'id del progetto e poi
+il nome del task che deve essere eliminato.
+
+ASSEGNARE UN TASK DI UN MIO PROGETTO AD UN UTENTE CHE HA VISIBILITA' SUL MIO PROGETTO: tasks/assign
+Controllando comunque che l'utente proprietario stia scrivendo da tastiera un user di un membro del progetto, si 
+permette di assegnare un task ad un utente tramite l'id del progetto,il nome del task, e poi il firstName dell'utente.
