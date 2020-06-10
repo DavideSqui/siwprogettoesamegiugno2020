@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang=en xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Projects visible(you are member) List</title>
+</head>
+<body>
+<h1>Your projects</h1>
+<div>
+ <table>
+  <thead>
+    <tr>
+     <th>Name</th>
+     <th>Description</th>
+    </tr>
+  </thead>
+           <tbody>
+            <tr th:each="project:${projectsList}">
+               <td> <a th:href="'/projects/'+${project.id}" th:text="${project.name}">...</a></td>
+               <td th:text="${project.description}">...</td>
+            </tr>
+           </tbody>  
+ </table>
+</div>
+<h2>Click to see project informations</h2>
+<h2>else <a href="/home">Return UserHome</a></h2>
+</body>
+</html>

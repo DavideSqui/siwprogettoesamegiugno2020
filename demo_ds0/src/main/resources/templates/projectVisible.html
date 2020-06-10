@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang=en xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Shared Required Project</title>
+</head>
+<body>
+Project:<h1 th:text="${project.id}"></h1>
+name:<h1 th:text="${project.name}"></h1>
+description:<h1 th:text="${project.description}"></h1>
+
+   <div th:if="${members.size()>0}">
+       <h5>Shared with</h5>
+          <ul>
+              <li th:each="member:${members}">
+                <div th:text="${member.firstName}+' '+${member.lastName}"></div>
+               </li>
+          </ul>
+    </div>
+
+         <h3>Tasks:</h3>
+         <ul>
+              <li th:each="task:${project.tasks}">
+                <div th:text="${task.name}"></div>
+                <div th:text="${task.description}" ></div>
+               </li>
+          </ul>
+          The owner can operate on this project!
+         <a href="/projects/sharing">Return to your projects sharing page</a>
+</body>
+</html>

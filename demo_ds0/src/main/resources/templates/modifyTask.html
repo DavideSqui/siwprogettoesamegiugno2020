@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang=en xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>modify Task</title>
+</head>
+<body>
+<form id="registerUserForm" th:action="@{/tasks/update}"
+		method="POST">
+
+
+		<table>
+			<tr>
+				<td><label for="IdInputProject">Id of project that have this Task</label>
+				<td><input id="IdInputProject" type="text"
+					placeholder="ID" required
+					th:field="${projectForm.id}" /></td>
+				<td th:if="${#fields.hasErrors('projectForm.id')}"
+					th:errors="${projectForm.id}" th:style="'color=red'"></td>
+			</tr>
+
+				
+			<tr>
+				<td><label for="nameInput">Name of the task you whould modify description and state of completation:</label>
+				<td><input id="nameInput" type="text"
+					placeholder="NAME" required
+					th:field="${taskForm.name}" /></td>
+				<td th:if="${#fields.hasErrors('taskForm.name')}"
+					th:errors="${taskForm.name}" th:style="'color=red'"></td>
+			</tr>
+
+			<tr>
+				<td><label for="descriptionInput">Description:</label>
+				<td><input id="descriptionInput" type="text"
+					placeholder="DESCRIPTION" required th:field="${taskForm.description}" /></td>
+				<td th:if="${#fields.hasErrors('taskForm.description')}"
+					th:errors="${taskForm.description}" th:style="'color=red'"></td>
+			</tr>   
+			
+			<tr>
+				<td><label for="completedInput">Description:</label>
+				<td><input id="completedInput" type="text"
+					placeholder="COMPLETED" required th:field="${taskForm.completed}" /></td>
+				<td th:if="${#fields.hasErrors('taskForm.completed')}"
+					th:errors="${taskForm.completed}" th:style="'color=red'"></td>
+			</tr>  
+			<tr> 
+				<td>
+					<button type="submit">Accept</button>
+				</td>
+			</tr>
+
+		</table>
+
+	</form>
+	<a href="/home">Abort</a>
+</body>
+</html>

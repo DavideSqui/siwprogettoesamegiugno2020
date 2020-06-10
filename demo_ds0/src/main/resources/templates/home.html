@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang=en xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+	<h1 th:text="'Welcome ,' + ${user.firstName} + '!'"></h1>
+    <h2> Project  Operations:</h2>
+	<h4>
+		<a href="/projects">My projects</a>
+	</h4>
+	<h4>
+		<a href="/projects/sharing">Shared with me</a>
+	</h4>
+	<h4>
+		<a href="/projects/add">Create new Project </a>
+	</h4>
+	<h4>
+	<a href="/projects/modify">Update project</a>
+	</h4>
+	<h4>
+	<a href="/projects/share">Share Project owned</a>
+	</h4>
+	<h4>
+		<a href="/projects/delete">Delete project owned</a>
+	</h4>
+	
+	<h2> Task Operations:</h2>
+	<h4>
+	<a href="/tasks/add">Create task in one project owned</a>
+	</h4>
+	<h4>
+	<a href="/tasks/update">Modify task in one project owned</a>
+	</h4>
+	<h4>
+	<a href="/tasks/delete">Delete task in one project owned</a>
+	</h4>
+	<h4>
+	<a href="/tasks/assign">Assign task to one member of the project owned</a>
+	</h4>
+	<h2>Profile Operations:</h2>
+	<h4>
+		<a href="/users/me">Profile</a>
+	</h4>
+	<h4>
+		<a href="/logout">Logout</a>
+	</h4>
+</body>
+</html>
